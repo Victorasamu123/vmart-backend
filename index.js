@@ -15,6 +15,8 @@ mongoose.connect(URI,(err)=>{
         console.log("connecting with database successful");
     }
 });
+const auth = require("./routes/auth.route");
+app.use("/auth",auth);
 app.listen(PORT,()=>{
     console.log(`app listening at port :${PORT}`);
 })
