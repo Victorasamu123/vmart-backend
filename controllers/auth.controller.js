@@ -15,19 +15,19 @@ const signup=(req,res)=>{
                 form.save((err)=>{
                     if(err){
                      console.log(err)
-                     res.send({message:"signup not succesful",     status:false})
+                     res.send({message:"signup not succesful",     status:false});
                     }else{
                      console.log("success")
-                     res.send({message:"signup successful",status:true})
+                     res.send({message:"signup successful",status:true});
                     }
                 })
             }
         }
     })
 }
-const signin=()=>{
+const signin=(req,res)=>{
     console.log(req.body);
-     res.send({message:"in process though"})
+     res.send({message:"in process though"});
 }
 
-module.exports={signup};
+module.exports={signup,signin};

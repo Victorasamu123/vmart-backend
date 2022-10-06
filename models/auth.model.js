@@ -5,6 +5,7 @@ const authSchema = mongoose.Schema({
     lastname:{required:true,type:String},
     email:{required:true,type:String,unique:true},
     password:{required:true,type:String},
+    profilepicture:{type:String},
     status:{required:true,type:Boolean}
 });
 
