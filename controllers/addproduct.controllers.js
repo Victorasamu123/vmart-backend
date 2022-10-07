@@ -9,5 +9,23 @@ cloudinary.config({
 const addphones=(req,res)=>{
     console.log(req.body);
     const myPhoneFile=req.body.productimage
-
+    
+    cloudinary.v2.uploader.upload(myPhoneFile,(err,result)=>{
+        if(err){
+            console.log("File did not upload")
+            res.send({message:"upload failed",status:false})
+    
+        }else{
+            console.log(result.secure_url);
+            const myImage= result.secure_url
+            let newPhoneProduct = new phoneCatModel({...req.body,phoneimage:myImage});
+            newPhoneProduct.save((err)=>{
+                if(err){
+                    console.log(err)
+                }else{
+                    res.send({message:"product uploaded successfully",status:true})
+                }
+            })
+        }
+    })
 }
