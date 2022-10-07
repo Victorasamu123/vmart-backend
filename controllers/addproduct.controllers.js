@@ -18,7 +18,7 @@ const addphones=(req,res)=>{
         }else{
             console.log(result.secure_url);
             const myImage= result.secure_url
-            let newPhoneProduct = new phoneCatModel({...req.body,phoneimage:myImage});
+            let newPhoneProduct = new phoneCatModel({...req.body,productimage:myImage});
             newPhoneProduct.save((err)=>{
                 if(err){
                     console.log(err)
@@ -29,3 +29,5 @@ const addphones=(req,res)=>{
         }
     })
 }
+
+module.exports={addphones}
