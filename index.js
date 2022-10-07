@@ -16,7 +16,9 @@ mongoose.connect(URI,(err)=>{
     }
 });
 const auth = require("./routes/auth.route");
+const addproduct = require("./routes/addproduct.route");
 app.use("/auth",auth);
+app.use("/addproducts",addproduct);
 app.listen(PORT,()=>{
     console.log(`app listening at port :${PORT}`);
 })
