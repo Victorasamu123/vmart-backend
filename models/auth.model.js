@@ -20,6 +20,18 @@ authSchema.pre("save",function(next){
         }
     })
 })
+authSchema.methods.validatePassword = function(password,callback){
+    // console.log(password)
+    // console.log(this)
+    bcrypt.compare(password,this.password,(err,same)=>{
+        console.log(same)
+        if(!err){
+            callback(err,same)
+        }else{
+            next()
+        }
+    })
+}
 
 const authModel = mongoose.model("vmart-signup_collectios",authSchema);
 

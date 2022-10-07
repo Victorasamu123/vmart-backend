@@ -1,5 +1,5 @@
 const authModel = require("../models/auth.model");
-
+const jwt = require("jsonwebtoken");
 const signup=(req,res)=>{
     console.log(req.body);
     authModel.findOne({email:req.body.email},(err,result)=>{
@@ -15,9 +15,9 @@ const signup=(req,res)=>{
                 form.save((err)=>{
                     if(err){
                      console.log(err)
-                     res.send({message:"signup not succesful",     status:false});
+                     res.send({message:"signup not succesful",status:false});
                     }else{
-                     console.log("success")
+                     console.log("success");
                      res.send({message:"signup successful",status:true});
                     }
                 })
@@ -27,7 +27,31 @@ const signup=(req,res)=>{
 }
 const signin=(req,res)=>{
     console.log(req.body);
-     res.send({message:"in process though"});
+    let {password,email} = req.body
+    authModel.findOne({email:req.body.email},(err,user)=>{
+        if(err){
+            res.send({message:"Server Error",status:false})
+        }else{
+            if(user){
+                user.validatePassword(password,(err,same)=>{
+                    if(err){
+                        res.send({message:"Server Error",status:false})
+                    }else{
+                        if(same){
+                            let token =jwt.sign({email},"secret",{expiresIn:10})
+                            console.log(token)
+                            res.send({message:"User Signed in Successfully",status:true,token,userId:user._id,userStatus:user.status})
+                        }else{
+                            res.send({message:"Wrong Password",status:false})
+                        }
+                    }
+                })
+                // res.send({message:"Email Exists",status:true})
+            }else{
+                res.send({message:"invalid Email",status:false})
+            }
+        }
+    })
 }
 
 module.exports={signup,signin};
