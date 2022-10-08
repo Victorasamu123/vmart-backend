@@ -6,7 +6,7 @@ const getphones=(req,res)=>{
             res.send({message:"internal server error"});
         }else{
             console.log(result)
-            res.send({phonearray:result});
+            res.send({phonearray:result,message:"result"});
         }
     })
 }
@@ -14,13 +14,12 @@ const getphones=(req,res)=>{
 const productdetails=(req,res)=>{
     console.log(req.body)
     if(req.body.itemcategory==="phones"){
-        console.log("oppoo")
-        phoneCatModel.findOne({itemcategory:req.body.itemcategory,item_id:req.body.item_id},(err,result)=>{
+        phoneCatModel.findById({_id:req.body.item_id},(err,result)=>{
             if(err){
-                res.send({message:"internal server error",status:false})
+            res.send({message:"internal server error"});
             }else{
                 console.log(result)
-                res.send({message:"product result",product:result})
+                res.send({message:"result",product:result})
             }
         })
     }
