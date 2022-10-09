@@ -1,5 +1,6 @@
 const phoneCatModel = require("../models/phonecat.model");
-const cloudinary = require("cloudinary")
+const compCatModel = require("../models/compcat.model");
+const cloudinary = require("cloudinary");
 cloudinary.config({ 
     cloud_name: process.env.CLOUD_NAME, 
     api_key: process.env.API_KEY, 
@@ -29,5 +30,28 @@ const addphones=(req,res)=>{
         }
     })
 }
+const addcomp=(req,res)=>{
+    console.log(req.body);
+    const mycompFile=req.body.productimage
+    
+    cloudinary.v2.uploader.upload(mycompFile,(err,result)=>{
+        if(err){
+            console.log("File did not upload")
+            res.send({message:"upload failed",status:false})
+    
+        }else{
+            console.log(result.secure_url);
+            const myImage= result.secure_url
+            let newPhoneProduct = new compCatModel({...req.body,productimage:myImage});
+            newPhoneProduct.save((err)=>{
+                if(err){
+                    console.log(err)
+                }else{
+                    res.send({message:"product uploaded successfully",status:true})
+                }
+            })
+        }
+    })
+}
 
-module.exports={addphones}
+module.exports={addphones,addcomp}

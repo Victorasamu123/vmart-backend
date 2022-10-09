@@ -9,6 +9,6 @@ const compCatSchema=mongoose.Schema({
     productdiscount:{required:true,type:String}
 });
 
-const compCatModel= mongoose.model("phonecat_collections",compCatSchema);
+const compCatModel= mongoose.model("compcat_collections",compCatSchema);
 
 module.exports=compCatModel;
