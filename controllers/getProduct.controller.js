@@ -1,4 +1,5 @@
 const compCatModel = require("../models/compcat.model");
+const electCatModel = require("../models/electcat.model");
 const phoneCatModel = require("../models/phonecat.model");
 
 const getphones=(req,res)=>{
@@ -22,6 +23,16 @@ const getcomps=(req,res)=>{
         }
     })
 }
+const getelects=(req,res)=>{
+    electCatModel.find((err,result)=>{
+        if(err){
+            res.send({message:"internal server error"});
+        }else{
+            console.log(result)
+            res.send({electarray:result,message:"result"});
+        }
+    })
+}
 const productdetails=(req,res)=>{
     console.log(req.body)
     if(req.body.itemcategory==="phones"){
@@ -42,6 +53,15 @@ const productdetails=(req,res)=>{
                 res.send({message:"result",product:result})
             }
         })
+    }else if(req.body.itemcategory==="electronics"){
+        electCatModel.findById({_id:req.body.item_id},(err,result)=>{
+            if(err){
+            res.send({message:"internal server error"});
+            }else{
+                console.log(result)
+                res.send({message:"result",product:result})
+            }
+        })
     }
 }
-module.exports={getphones,productdetails,getcomps};
+module.exports={getphones,productdetails,getcomps,getelects};
