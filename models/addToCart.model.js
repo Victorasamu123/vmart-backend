@@ -9,6 +9,6 @@ const addToCartSchema=mongoose.Schema({
     productdiscount:{required:true,type:String}
 });
 
-const addToCartModel= mongoose.model("electcat_collections",addToCartSchema);
+const addToCartModel= mongoose.model("cart_collections",addToCartSchema);
 
 module.exports=addToCartModel;
