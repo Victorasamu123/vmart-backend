@@ -26,6 +26,12 @@ const addtocart =(req,res)=>{
 
 const getcartpage=(req,res)=>{
     console.log(req.body)
-    addToCartModel.findOne((userId))
+    addToCartModel.find({userId:req.body.userId},(err,result)=>{
+        if(err){
+            res.send({message:"an error occured",status:false})
+        }else{
+            res.send({message:"result",status:true,cartresult:result})
+        }
+    })
 }
-module.exports={addtocart}
+module.exports={addtocart,getcartpage}
