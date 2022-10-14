@@ -58,4 +58,14 @@ const getcartpage=(req,res)=>{
         }
     })
 }
-module.exports={addtocart,getcartpage,saveItem}
+const getsaveitem=(req,res)=>{
+    console.log(req.body)
+    saveItemModel.find({userId:req.body.userId},(err,result)=>{
+        if(err){
+            res.send({message:"an error occured",status:false})
+        }else{
+            res.send({message:"result",status:true,saveitemresult:result})
+        }
+    })
+}
+module.exports={addtocart,getcartpage,saveItem,getsaveitem}
