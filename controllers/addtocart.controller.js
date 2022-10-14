@@ -47,6 +47,23 @@ const saveItem=(req,res)=>{
             }
         }
     })
+    addToCartModel.findOneAndDelete({productimage:req.body.productimage,productname:req.body.productname,productprice:req.body.productprice},(err,result)=>{
+        if(err){
+           console.log(err)
+        }else{
+            // res.send({message:"delete",status:true});
+        }
+    })
+}
+const removeitem=(req,res)=>{
+    console.log(req.body)
+    addToCartModel.findOneAndDelete({productimage:req.body.productimage,productname:req.body.productname,productprice:req.body.productprice},(err,result)=>{
+        if(err){
+           console.log(err)
+        }else{
+            res.send({message:"delete",status:true});
+        }
+    })
 }
 const getcartpage=(req,res)=>{
     console.log(req.body)
@@ -68,4 +85,4 @@ const getsaveitem=(req,res)=>{
         }
     })
 }
-module.exports={addtocart,getcartpage,saveItem,getsaveitem}
+module.exports={addtocart,getcartpage,saveItem,getsaveitem,removeitem}
