@@ -30,7 +30,7 @@ const signin=(req,res)=>{
     let {password,email} = req.body
     authModel.findOne({email:req.body.email},(err,user)=>{
         if(err){
-            res.send({message:"Server Error",status:false})
+            res.send({message:"signin not successfull",status:false})
         }else{
             if(user){
                 user.validatePassword(password,(err,same)=>{
@@ -40,7 +40,7 @@ const signin=(req,res)=>{
                         if(same){
                             let token =jwt.sign({email},"secret",{expiresIn:10})
                             console.log(token)
-                            res.send({message:"User Signed in Successfully",status:true,token,userId:user._id,userStatus:user.status})
+                            res.send({message:"User Signed in Successfully",status:true,token,userId:user._id,userStatus:user.status,email:user.email})
                         }else{
                             res.send({message:"Wrong Password",status:false})
                         }
