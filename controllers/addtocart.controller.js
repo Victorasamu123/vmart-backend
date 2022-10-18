@@ -1,5 +1,6 @@
 const addToCartModel = require("../models/addToCart.model");
 const saveItemModel = require("../models/saveItem.model");
+const transactionsmodel = require("../models/Transactions.models");
 
 const addtocart =(req,res)=>{
     console.log(req.body);
@@ -115,4 +116,16 @@ const addtocart2=(req,res)=>{
         }
     })
 }
-module.exports={addtocart,getcartpage,saveItem,getsaveitem,removeitem,addtocart2}
+const transactions=(req,res)=>{
+   console.log(req.body)
+   let newTransaction= new transactionsmodel(req.body);
+   newTransaction.save((err)=>{
+    if(err){
+        console.log(err)
+        res.send({message:"an error occured",status:false});
+    }else{
+        res.send({message:"transaction successful",status:true});
+    }
+   })
+}
+module.exports={addtocart,getcartpage,saveItem,getsaveitem,removeitem,addtocart2,transactions}
