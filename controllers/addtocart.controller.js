@@ -128,4 +128,14 @@ const transactions=(req,res)=>{
     }
    })
 }
-module.exports={addtocart,getcartpage,saveItem,getsaveitem,removeitem,addtocart2,transactions}
+const getTransactions=(req,res)=>{
+    console.log(req.body)
+    transactionsmodel.find({userId:req.body.userId},(err,result)=>{
+        if(err){
+            res.send({message:"an error occurred",status:false})
+        }else{
+            res.send({message:"result",status:true,resulttrans:result})
+        }
+    })
+}
+module.exports={addtocart,getcartpage,saveItem,getsaveitem,removeitem,addtocart2,transactions,getTransactions}

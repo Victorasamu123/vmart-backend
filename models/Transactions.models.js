@@ -7,6 +7,8 @@ const transactionsSchema=mongoose.Schema({
     email:{required:true,type:String},
     userId:{required:true,type:String},
     productname2:{required:true,type:String},
+    ref:{required:true,type:String},
+    date:{required:true,type:String}
 });
 const transactionsmodel=mongoose.model("transactions_history",transactionsSchema)
 
