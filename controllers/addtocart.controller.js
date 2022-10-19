@@ -125,6 +125,13 @@ const transactions=(req,res)=>{
         res.send({message:"an error occured",status:false});
     }else{
         res.send({message:"transaction successful",status:true});
+        addToCartModel.findOneAndDelete({productname:req.body.productname2},(err,result)=>{
+            if(err){
+               console.log(err)
+            }else{
+                // res.send({message:"delete",status:true});
+            }
+        })
     }
    })
 }
