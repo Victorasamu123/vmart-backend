@@ -5,7 +5,8 @@ const transactionsSchema=mongoose.Schema({
     lastname:{required:true,type:String},
     amount:{required:true,type:String},
     email:{required:true,type:String},
-    userId:{required:true,type:String}
+    userId:{required:true,type:String},
+    productname2:{required:true,type:String},
 });
 const transactionsmodel=mongoose.model("transactions_history",transactionsSchema)
 
