@@ -66,7 +66,7 @@ const dashboard=(req,res)=>{
 }
 const getuserDetails=(req,res)=>{
     console.log(req.body);
-    authModel.findOne({_id:req.body.user_id},(err,result)=>{
+    authModel.findOne({_id:req.body.userId},(err,result)=>{
         if(err){
             res.send({message:"internal server error",status:false});
         }else{
