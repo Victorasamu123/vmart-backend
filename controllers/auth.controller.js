@@ -64,4 +64,14 @@ const dashboard=(req,res)=>{
         }
     })
 }
-module.exports={signup,signin,dashboard};
+const getuserDetails=(req,res)=>{
+    console.log(req.body);
+    authModel.findOne({_id:req.body.user_id},(err,result)=>{
+        if(err){
+            res.send({message:"internal server error",status:false});
+        }else{
+            res.send({message:"result are here already",status:true,result:result})
+        }
+    })
+}
+module.exports={signup,signin,dashboard,getuserDetails};
