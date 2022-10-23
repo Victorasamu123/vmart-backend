@@ -38,7 +38,7 @@ const signin=(req,res)=>{
                         res.send({message:"Server Error",status:false})
                     }else{
                         if(same){
-                            let token =jwt.sign({email},"secret",{expiresIn:10})
+                            let token =jwt.sign({email},"secret",{expiresIn:"2h"})
                             console.log(token)
                             res.send({message:"User Signed in Successfully",status:true,token,userId:user._id,userStatus:user.status,email:user.email})
                         }else{
@@ -74,4 +74,16 @@ const getuserDetails=(req,res)=>{
         }
     })
 }
-module.exports={signup,signin,dashboard,getuserDetails};
+const tokenverify=(req,res)=>{
+    let token = req.headers.authorization.split(" ")[1]
+    jwt.verify(token,"secret",(err,result)=>{
+        if(err){
+            console.log(err)
+            res.send({message:"Error occured",status:false})
+        }else{
+            let email = result.email
+            res.send({message:"Congratulations",status:true})
+        }
+    })
+}
+module.exports={signup,signin,dashboard,getuserDetails,tokenverify};
