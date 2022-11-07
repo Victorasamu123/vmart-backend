@@ -12,4 +12,5 @@ addproduct.post("/addelects",addelect);
 addproduct.post("/addgames",addgame);
 addproduct.get("/getelects",getelects);
 addproduct.get("/getgames",getgames);
+addproduct.get("/getgamess",getgames);
 module.exports=addproduct;

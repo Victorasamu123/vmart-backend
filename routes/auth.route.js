@@ -5,5 +5,5 @@ auth.post("/signup",signup);
 auth.post("/signin",signin);
 auth.post("/dashboard",dashboard);
 auth.post("/users",getuserDetails);
-auth.get("/verifytoken",tokenverify)
+auth.get("/verifytoken",tokenverify);
 module.exports=auth;
