@@ -4,7 +4,7 @@ const transactionsmodel = require("../models/Transactions.models");
 
 const addtocart =(req,res)=>{
     console.log(req.body);
-    addToCartModel.findOne({productimage:req.body.productimage,productname:req.body.productname,productprice:req.body.productprice},(err,result)=>{
+    addToCartModel.findOne({productimage:req.body.productimage,productname:req.body.productname,productprice:req.body.productprice,userId:req.body.userId},(err,result)=>{
         if(err){
             res.send({message:"internal server error",status:false});
         }else{
